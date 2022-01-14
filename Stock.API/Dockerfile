@@ -6,17 +6,17 @@ EXPOSE 80
 EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Payment.API/Payment.API.csproj", "Payment.API/"]
+COPY ["Stock.API/Stock.API.csproj", "Stock.API/"]
 COPY ["Shared/Shared.csproj", "Shared/"]
-RUN dotnet restore "Payment.API/Payment.API.csproj"
+RUN dotnet restore "Stock.API/Stock.API.csproj"
 COPY . .
-WORKDIR "/src/Payment.API"
-RUN dotnet build "Payment.API.csproj" -c Release -o /app/build
+WORKDIR "/src/Stock.API"
+RUN dotnet build "Stock.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Payment.API.csproj" -c Release -o /app/publish
+RUN dotnet publish "Stock.API.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Payment.API.dll"]
+ENTRYPOINT ["dotnet", "Stock.API.dll"]

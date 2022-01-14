@@ -32,7 +32,7 @@ builder.Services.AddMassTransit(x =>
     x.AddConsumer<Order.API.Consumers.StockNotReservedEvent>();
     x.UsingRabbitMq((context, cfg) =>
     {
-
+        cfg.Host("rabbitmq");
         cfg.ReceiveEndpoint(RabbitMQSettingsConst.OrderPaymentCompletedEventQueue, e =>
         {
             e.ConfigureConsumer<Order.API.Consumers.PaymentCompletedEvent>(context);

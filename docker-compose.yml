@@ -1,0 +1,39 @@
+version: '3.4'
+
+services:
+  order.api:
+    image: ${DOCKER_REGISTRY-}orderapi
+    build:
+      context: .
+      dockerfile: Order.API/Dockerfile
+    depends_on:
+      - mongo
+    ports:
+      - "5100:80"
+  payment.api:
+    image: ${DOCKER_REGISTRY-}paymentapi
+    build:
+      context: .
+      dockerfile: Payment.API/Dockerfile
+    depends_on:
+      - mongo
+    ports:
+      - "5101:80"
+  product.api:
+    image: ${DOCKER_REGISTRY-}productapi
+    build:
+      context: .
+      dockerfile: Product.API/Dockerfile
+    depends_on:
+      - mongo
+    ports:
+      - "5102:80"
+  stock.api:
+    image: ${DOCKER_REGISTRY-}stockapi
+    build:
+      context: .
+      dockerfile: Stock.API/Dockerfile
+    depends_on:
+      - mongo
+    ports:
+      - "5103:80"
