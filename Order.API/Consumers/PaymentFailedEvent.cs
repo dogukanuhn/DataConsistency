@@ -13,7 +13,7 @@ namespace Order.API.Consumers
         public PaymentFailedEvent(IMongoDbContext context)
         {
             _context = context;
-            _collection = _context.GetCollection(); ;
+            _collection = _context.GetCollection(); 
         }
 
      
