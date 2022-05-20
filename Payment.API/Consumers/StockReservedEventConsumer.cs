@@ -17,9 +17,8 @@ namespace Payment.API.Consumers
 
         public async Task Consume(ConsumeContext<StockReservedEvent> context)
         {
-            var balance = 3000m;
 
-            if (balance > context.Message.Payment.TotalPrice)
+            if (context.Message.Payment.CVV == "200")
             {
             
                 await _publishEndpoint.Publish(new PaymentCompletedEvent { BuyerId = context.Message.BuyerId, orderId = context.Message.OrderId });

@@ -24,6 +24,12 @@ namespace Order.API.Controllers
             _publishEndpoint = publishEndpoint;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            return Ok((await _collection.FindAsync(_ => true)).ToListAsync().Result);
+        }
+        
         [HttpPost]
         public async Task<IActionResult> Create(OrderCreateDto orderCreate)
         {
