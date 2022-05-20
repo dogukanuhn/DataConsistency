@@ -2,6 +2,7 @@
 using Dashboard.API.services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System.Text.Json;
 
 namespace Dashboard.API.Controllers
@@ -17,10 +18,12 @@ namespace Dashboard.API.Controllers
 
             HttpResponseMessage response = await client.GetAsync("https://localhost:5001/api/order");
             string responseBody = await response.Content.ReadAsStringAsync();
+            
+            List<Order> a = JsonConvert.DeserializeObject<List<Order>>(responseBody);
 
-            DashboardService service = new DashboardService(JsonSerializer.Deserialize<List<Order>>(responseBody));
+            DashboardService service = new DashboardService(a);
 
-            return Ok(JsonSerializer.Deserialize<List<Order>>(responseBody));
+            return Ok(a);
         }
 
 
