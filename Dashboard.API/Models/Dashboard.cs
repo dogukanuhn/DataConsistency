@@ -12,21 +12,21 @@ namespace Dashboard.API.Models
             SaleStatus = saleStatus;
         }
 
-        public SaleStatus? SaleStatus { get; set; }
-        public FailedReason? FailedReason { get; set; }
+        public SaleStatus SaleStatus { get; set; }
+        public FailedReason FailedReason { get; set; }
 
-        public List<Order>? Orders { get; set; }
+        public List<Order> Orders { get; set; }
 
     }
 
     public class SaleStatus
     {
-        int Success { get; set; }
-        int Fail { get; set; }
+        public int Success { get; set; }
+        public int Suspend { get; set; }
     }
     public class FailedReason
     {
-        int NotEnoughStock { get; set; }
-        int NotEnoughBalance { get; set; }
+        public int NotEnoughStock { get; set; }
+        public int NotEnoughBalance { get; set; }
     }
 }

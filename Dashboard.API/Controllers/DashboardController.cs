@@ -19,11 +19,11 @@ namespace Dashboard.API.Controllers
             HttpResponseMessage response = await client.GetAsync("https://localhost:5001/api/order");
             string responseBody = await response.Content.ReadAsStringAsync();
             
-            List<Order> a = JsonConvert.DeserializeObject<List<Order>>(responseBody);
+            List<Order> ConvertedOrders = JsonConvert.DeserializeObject<List<Order>>(responseBody);
 
-            DashboardService service = new DashboardService(a);
+            DashboardService service = new DashboardService(ConvertedOrders);
 
-            return Ok(a);
+            return Ok(service.Dashboard);
         }
 
 
